@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { LargePersonListItem } from './people/LargePersonListItem';
+import { SmallPersonListItem } from './people/SmallPersonListItem';
+import { RegularList } from './RegularList';
+import { NumberedList } from './NumberedList';
+import { SplitScreen } from './SplitScreen';
+import { people, products } from './store/data';
+import { LargeProductListItem } from './products/LargeProductListItem';
+import { Modal } from './Modal';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SplitScreen
+        leftWeight={1}
+        rightWeight={3} >
+        <NumberedList
+          items={products}
+          resourceName="product"
+          itemComponent={LargeProductListItem} />
+        <RegularList
+          items={people}
+          resourceName="person"
+          itemComponent={LargePersonListItem} />
+      </SplitScreen>
+      <Modal>
+        <LargeProductListItem product={products[0]} />
+      </Modal>
+    </>
   );
 }
 
